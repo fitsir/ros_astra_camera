@@ -1,5 +1,11 @@
 # astra camera
 
+Note:  2017-2-24
+
+- modify the CMakefile.txt to use the correct OS name in Mac OS X
+
+- use my modified OpenNI2 [repository](https://github.com/fitsir/OpenNI2.git) which ignored the shift-negative-value error and modified the os name
+
 ## 1) go to catkin workshop dir and compiler astra_camera
 ```
 $ catkin_make --pkg astra_camera
