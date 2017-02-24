@@ -8,15 +8,15 @@ find_package(Boost REQUIRED COMPONENTS system thread)
 option(FILTER "OB Filter library" ON)
 
 if( ${FILTER} STREQUAL "ON" )
-set(obfilter "On")
+  set(obfilter "On")
 else()
-set(obfilter "Off")
+  set(obfilter "Off")
 endif()
 
 if ( APPLE)
-set (OS_NAME "MacOS")
+  set (OS_NAME "MacOS")
 elseif(UNIX AND NOT APPLE)
-set(OS_NAME "Linux")
+  set(OS_NAME "Linux")
 endif()
 
 
@@ -107,9 +107,15 @@ install(TARGETS astra_wrapper astra_camera_nodelet astra_camera_node astra_list_
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   )
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/openni2/Redist/libOpenNI2Orbbec.dylib
-  DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/
-)
+if (APPLE)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/openni2/Redist/libOpenNI2Orbbec.dylib
+    DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/
+  )
+elseif(UNIX AND NOT APPLE)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/openni2/Redist/libOpenNI2Orbbec.so
+    DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/
+  )
+endif()
 
 install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/openni2/Redist/OpenNI2
   DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/
